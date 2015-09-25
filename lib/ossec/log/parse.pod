@@ -18,10 +18,7 @@ Perl interface for parsing ossec alert files
 =head1 DESCRIPTION
 
 This library provides an easy and convenient way to parse the log files generated
-by the L<Bro Network Monitoring System|http://www.bro.org>.
-
-If the L<JSON> module is installed, this module can also be used to parse Bro log
-files that were written in JSON format.
+by L<ossec|http://www.ossec.net>.
 
 =head1 Constructor
 
