@@ -67,7 +67,7 @@ sub getAlert {
         chomp($line);
 
         if ($line =~ m/^\*\* Alert (\d+\.\d+):(.*)-(.*)/) {
-            $event{'ts-unix'} = $1;
+            $event{'ts'} = $1;
             $event{'type'} = $2;
             $event{'group'} = $3;
             # clean up variables
@@ -81,15 +81,15 @@ sub getAlert {
             $position++;
             if ($position == 2) {
                 if ($line =~ m!(\d+ \w+ \d+ \d+:\d+:\d+) \((.*)\) (\S+)->(.*)!) { # event from remote agent
-                    $event{'ts-human'} = $1;
-                    $event{'agent'} = $2;
-                    $event{'agent-ip'} = $3;
+                    $event{'ts.human'} = $1;
+                    $event{'agent.name'} = $2;
+                    $event{'agent.ip'} = $3;
                     $event{'location'} = $4;
                 }
                 elsif ($line =~ m!(\d+ \w+ \d+ \d+:\d+:\d+) (\S+)->(.*)!) { # event from local agent
-                    $event{'ts-human'} = $1;
-                    $event{'agent'} = $2;
-                    $event{'agent-ip'} = undef;
+                    $event{'ts.human'} = $1;
+                    $event{'agent.name'} = $2;
+                    $event{'agent.ip'} = '-';
                     $event{'location'} = $3;
                 }
                 $event{'2'} = $line;
