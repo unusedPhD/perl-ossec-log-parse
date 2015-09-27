@@ -7,7 +7,7 @@ ossec::log::parse - Object-oriented Perl interface for parsing ossec alert files
   use ossec::log::parse;
   
   my $parse = ossec::log::parse->new('/path/to/logfile');
-  while ( $events = $parse->getEvent() ) {
+  while ( $events = $parse->getAlert() ) {
     print $fields->{full_log}."\n";
   }
 
