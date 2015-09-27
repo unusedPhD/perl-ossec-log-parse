@@ -83,6 +83,8 @@ Boolean; if set to true, C<< getLine() >> will return empty columns as undef ins
 Read input and return the parsed event data as a hash. Returns
 undef when on EOF.
 
+Hash includes: ts, ts.human, type, group, agent.name, agent.ip, location, rule.id, rule.level, rule.comment, full_log
+
 =item B<fh()>
 
 Return the filehandle data is read from. Returns undef if data is read from C<< <> >>.
