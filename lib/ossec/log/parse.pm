@@ -59,7 +59,7 @@ sub getAlert {
     my $self = shift;
     my $fh = $self->{fh};
 
-    my %event;
+    my %alert;
     my $position = 0;
 
     while ( my $line = defined($fh) ? <$fh> : <> ) {
@@ -67,56 +67,56 @@ sub getAlert {
         chomp($line);
 
         if ($line =~ m/^\*\* Alert (\d+\.\d+):(.*)-(.*)/) {
-            $event{'ts'} = $1;
-            $event{'type'} = $2;
-            $event{'group'} = $3;
+            $alert{'ts'} = $1;
+            $alert{'type'} = $2;
+            $alert{'group'} = $3;
             # clean up variables
-            $event{'type'} =~ s/^\s+|\s+$//g; # strip leading/trailing whitespace
-            $event{'group'} =~ s/^\s+|\s+$//g;
-            $event{'group'} =~ s/,$//g; # strip trailing comma
+            $alert{'type'} =~ s/^\s+|\s+$//g; # strip leading/trailing whitespace
+            $alert{'group'} =~ s/^\s+|\s+$//g;
+            $alert{'group'} =~ s/,$//g; # strip trailing comma
             $position = 1;
             next;
         }
         if ($position > 0) {
             $position++;
             if ($position == 2) {
-                if ($line =~ m!(\d+ \w+ \d+ \d+:\d+:\d+) \((.*)\) (\S+)->(.*)!) { # event from remote agent
-                    $event{'ts.human'} = $1;
-                    $event{'agent.name'} = $2;
-                    $event{'agent.ip'} = $3;
-                    $event{'location'} = $4;
+                if ($line =~ m!(\d+ \w+ \d+ \d+:\d+:\d+) \((.*)\) (\S+)->(.*)!) { # alert from remote agent
+                    $alert{'ts.human'} = $1;
+                    $alert{'agent.name'} = $2;
+                    $alert{'agent.ip'} = $3;
+                    $alert{'location'} = $4;
                 }
-                elsif ($line =~ m!(\d+ \w+ \d+ \d+:\d+:\d+) (\S+)->(.*)!) { # event from local agent
-                    $event{'ts.human'} = $1;
-                    $event{'agent.name'} = $2;
-                    $event{'agent.ip'} = '-';
-                    $event{'location'} = $3;
+                elsif ($line =~ m!(\d+ \w+ \d+ \d+:\d+:\d+) (\S+)->(.*)!) { # alert from local agent
+                    $alert{'ts.human'} = $1;
+                    $alert{'agent.name'} = $2;
+                    $alert{'agent.ip'} = '-';
+                    $alert{'location'} = $3;
                 }
-                $event{'2'} = $line;
+                $alert{'2'} = $line;
                 next;
             }
             elsif ($position == 3) {
                 if ($line =~ /^Rule: (\d+) \(level (\d+)\) -> '(.*)'$/) {
-                    $event{'rule.id'} = $1;
-                    $event{'rule.level'} = $2;
-                    $event{'rule.comment'} = $3;
+                    $alert{'rule.id'} = $1;
+                    $alert{'rule.level'} = $2;
+                    $alert{'rule.comment'} = $3;
                     # clean up variable
-                    $event{'rule.comment'} =~ s/\.$//; # remove any trailing period
+                    $alert{'rule.comment'} =~ s/\.$//; # remove any trailing period
                 }
-                $event{'3'} = $line;
+                $alert{'3'} = $line;
                 next;
             }
             elsif ($line !~ m/^$/ ) {
-                if ($event{'full_log'} ) {
-                    $event{'full_log'} = "$event{'full_log'}\n$line";
+                if ($alert{'full_log'} ) {
+                    $alert{'full_log'} = "$alert{'full_log'}\n$line";
                 }
                 else {
-                    $event{'full_log'} = $line;
+                    $alert{'full_log'} = $line;
                 }
             }
             else {
                 $position = 0;
-                return \%event;
+                return \%alert;
             }
         }
     }
