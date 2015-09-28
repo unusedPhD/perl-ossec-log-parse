@@ -66,10 +66,6 @@ Name of file to be used as data source.
 
 Boolean; if set to true, data is read from C<< <> >>, if no other data source is given.
 
-=item B<empty_as_undef>
-
-Boolean; if set to true, C<< getLine() >> will return empty columns as undef instead of as empty arrayrefs.
-
 =back
 
 =back
