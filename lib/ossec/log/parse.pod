@@ -4,7 +4,7 @@ ossec::log::parse - Object-oriented Perl interface for parsing ossec alert files
 
 =head1 SYNOPSIS
 
-  # Sample alert
+  ### Sample alert ###
   # 
   # ** Alert 1443175627.1028: mail  - syslog,fts,authentication_success
   # 2015 Sep 25 06:07:07 (i7dev) 10.0.0.4->/var/log/auth.log
