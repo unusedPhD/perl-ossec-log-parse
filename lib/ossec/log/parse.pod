@@ -18,19 +18,19 @@ ossec::log::parse - Object-oriented Perl interface for parsing ossec alert files
   my $parse = ossec::log::parse->new('/path/to/logfile');
   while ( $alert = $parse->getAlert() ) {
     print $alert->{ts};
-    # 1443175627.1028 (unix time stamp of when alert was recorded)
+    # 1443175627.1028
     print $alert->{ts.human};
-    # 2015 Sep 25 06:07:07 (human readable time stamp of when alert was recorded)
+    # 2015 Sep 25 06:07:07
     print $alert->{type};     
     # mail 
     print $alert->{group};    
     # syslog,fts,authentication_success
     print $alert->{agent.name}; 
-    # i7dev (Either assigned agent name or local hostname)
+    # i7dev
     print $alert->{agent.ip}; 
-    # 10.0.0.4 (Remote agent IP)
+    # 10.0.0.4
     print $alert->{location};
-    # /var/log/auth.log (Log origin)
+    # /var/log/auth.log
     print $alert->{rule.id}; 
     # 10100
     print $alert->{rule.level}; 
