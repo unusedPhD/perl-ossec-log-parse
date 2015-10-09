@@ -1,12 +1,12 @@
 =head1 NAME
 
-ossec::log::parse - Object-oriented Perl interface for parsing ossec alert files
+Ossec::Log::Parse - Object-oriented Perl interface for parsing ossec alert files
 
 =head1 SYNOPSIS
 
-  use ossec::log::parse;
+  use Ossec::Log::Parse;
   
-  my $parse = ossec::log::parse->new('/path/to/logfile');
+  my $parse = Ossec::Log::Parse->new('/path/to/logfile');
   while ( $events = $parse->getAlert() ) {
     print $fields->{full_log}."\n";
   }

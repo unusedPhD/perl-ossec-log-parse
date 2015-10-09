@@ -1,4 +1,5 @@
 package ossec::log::parse;
+# ABSTRACT: Perl interface for parsing Ossec alert files
 
 use strict;
 use warnings;
