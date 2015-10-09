@@ -1,4 +1,4 @@
-package ossec::log::parse;
+package Ossec::Log::Parse;
 # ABSTRACT: Perl interface for parsing Ossec alert files
 
 use strict;
@@ -7,7 +7,7 @@ use autodie;
 use Carp;
 use Scalar::Util qw/openhandle/;
 
-our $VERSION = '0.1.0';
+our $VERSION = '0.1.2';
 
 BEGIN {
     my @accessors = qw/fh file/;
