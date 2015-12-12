@@ -7,7 +7,7 @@ use autodie;
 use Carp;
 use Scalar::Util qw/openhandle/;
 
-our $VERSION = '0.1.2';
+our $VERSION = '0.1.3';
 
 BEGIN {
     my @accessors = qw/fh file/;
@@ -108,7 +108,13 @@ sub getAlert {
                 next;
             }
             elsif ($line !~ m/^$/ ) {
-                if ($alert{'full_log'} ) {
+                if ($line =~ /^Src IP: (.*)$/) {
+                    $alert{'source.ip'} = $1;
+                }
+                elsif ($line =~ /^User: (.*)$/) {
+                    $alert{'user'} = $1;
+                }
+                elsif ($alert{'full_log'} ) {
                     $alert{'full_log'} = "$alert{'full_log'}\n$line";
                 }
                 else {
@@ -117,6 +123,12 @@ sub getAlert {
             }
             else {
                 $position = 0;
+                if (!$alert{'source.ip'}) {
+                    $alert{'source.ip'} = '-'
+                }
+                if (!$alert{'user'}) {
+                    $alert{'user'} = '-'
+                }
                 return \%alert;
             }
         }

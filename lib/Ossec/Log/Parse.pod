@@ -5,7 +5,7 @@ Ossec::Log::Parse - Object-oriented Perl interface for parsing Ossec alert files
 =head1 SYNOPSIS
 
   ### Sample alert ###
-  # 
+  #
   # ** Alert 1443175627.1028: mail  - syslog,fts,authentication_success
   # 2015 Sep 25 06:07:07 (i7dev) 10.0.0.4->/var/log/auth.log
   # Rule: 10100 (level 4) -> 'First time user logged in.'
@@ -14,32 +14,34 @@ Ossec::Log::Parse - Object-oriented Perl interface for parsing Ossec alert files
   # Sep 25 06:07:06 i7dev sshd[17673]: Accepted publickey for phirelight from 10.0.0.2 port 44857 ssh2: RSA 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
 
   use Ossec::Log::Parse;
-  
+
   my $parse = Ossec::Log::Parse->new('/path/to/logfile');
-  while ( $events = $parse->getAlert() ) {
-    print $alert->{ts};
+  while ( $alert = $parse->getAlert() ) {
+    print $alert->{'ts'};
     # 1443175627.1028
-    print $alert->{ts.human};
+    print $alert->{'ts.human'};
     # 2015 Sep 25 06:07:07
-    print $alert->{type};     
-    # mail 
-    print $alert->{group};    
+    print $alert->{'type'};
+    # mail
+    print $alert->{'group'};
     # syslog,fts,authentication_success
-    print $alert->{agent.name}; 
+    print $alert->{'agent.name'};
     # i7dev
-    print $alert->{agent.ip}; 
+    print $alert->{'agent.ip'};
     # 10.0.0.4
-    print $alert->{location};
+    print $alert->{'location'};
     # /var/log/auth.log
-    print $alert->{rule.id}; 
+    print $alert->{'rule.id'};
     # 10100
-    print $alert->{rule.level}; 
+    print $alert->{'rule.level'};
     # 4
-    print $alert->{rule.comment};
+    print $alert->{'rule.comment'};
     # First time user logged in
-    print $alert->{full_log}; 
-    # Src IP: 10.0.0.2
-    # User: phirelight
+    print $alert->{'source.ip'};
+    # 10.0.0.2
+    print $alert->{'user'};
+    # phirelight
+    print $alert->{'full_log'};
     # Sep 25 06:07:06 i7dev sshd[17673]: Accepted publickey for phirelight from 10.0.0.2 port 44857 ssh2: RSA 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
   }
 
@@ -111,7 +113,7 @@ Boolean; if set to true, data is read from C<< <> >>, if no other data source is
 Read input and return the parsed event data as a hash. Returns
 undef when on EOF.
 
-Hash includes: ts, ts.human, type, group, agent.name, agent.ip, location, rule.id, rule.level, rule.comment, full_log
+Hash includes: ts, ts.human, type, group, agent.name, agent.ip, location, rule.id, rule.level, rule.comment, source.ip, user, full_log
 
 =item B<fh()>
 
