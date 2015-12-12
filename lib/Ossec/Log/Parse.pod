@@ -17,27 +17,27 @@ Ossec::Log::Parse - Object-oriented Perl interface for parsing Ossec alert files
   
   my $parse = Ossec::Log::Parse->new('/path/to/logfile');
   while ( $events = $parse->getAlert() ) {
-    print $alert->{ts};
+    print $events->{ts};
     # 1443175627.1028
-    print $alert->{ts.human};
+    print $events->{ts.human};
     # 2015 Sep 25 06:07:07
-    print $alert->{type};     
+    print $events->{type};     
     # mail 
-    print $alert->{group};    
+    print $events->{group};    
     # syslog,fts,authentication_success
-    print $alert->{agent.name}; 
+    print $events->{agent.name}; 
     # i7dev
-    print $alert->{agent.ip}; 
+    print $events->{agent.ip}; 
     # 10.0.0.4
-    print $alert->{location};
+    print $events->{location};
     # /var/log/auth.log
-    print $alert->{rule.id}; 
+    print $events->{rule.id}; 
     # 10100
-    print $alert->{rule.level}; 
+    print $events->{rule.level}; 
     # 4
-    print $alert->{rule.comment};
+    print $events->{rule.comment};
     # First time user logged in
-    print $alert->{full_log}; 
+    print $events->{full_log}; 
     # Src IP: 10.0.0.2
     # User: phirelight
     # Sep 25 06:07:06 i7dev sshd[17673]: Accepted publickey for phirelight from 10.0.0.2 port 44857 ssh2: RSA 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
