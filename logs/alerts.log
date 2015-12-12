@@ -11,3 +11,8 @@ Rule: 5303 (level 3) -> 'User successfully changed UID to root.'
 User: root
 Sep 25 05:58:25 devG8-1 su[10627]: + /dev/pts/7 root:root
 
+** Alert 1449913347.461: mail  - ossec,low_diskspace,
+2015 Dec 12 04:42:27 devG8-1->df -h
+Rule: 531 (level 7) -> 'Partition usage reached 100% (disk space monitor).'
+ossec: output: 'df -h': /dev/mapper/devG8--1--vg-root  521G  490G  4.5G 100% /
+

@@ -111,8 +111,11 @@ sub getAlert {
                 if ($line =~ /^Src IP: (.*)$/) {
                     $alert{'source.ip'} = $1;
                 }
-                elsif ($line =~ /^User: (.*)$/) {
+                elsif ($line =~ /User: (.*)$/) {
                     $alert{'user'} = $1;
+                }
+                elsif (($line =~ /^\w{3} \d{1,2} \d{2}:\d{2}:\d{2}/) && ($alert{'group'} =~ m/syslog/)) {
+                    $alert{'full_log'} = $line;
                 }
                 elsif ($alert{'full_log'} ) {
                     $alert{'full_log'} = "$alert{'full_log'}\n$line";
@@ -124,10 +127,10 @@ sub getAlert {
             else {
                 $position = 0;
                 if (!$alert{'source.ip'}) {
-                    $alert{'source.ip'} = '-'
+                    $alert{'source.ip'} = '-';
                 }
                 if (!$alert{'user'}) {
-                    $alert{'user'} = '-'
+                    $alert{'user'} = '-';
                 }
                 return \%alert;
             }
