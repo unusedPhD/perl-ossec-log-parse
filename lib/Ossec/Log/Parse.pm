@@ -56,7 +56,6 @@ sub new {
 }
 
 sub getAlert {
-
     my $self = shift;
     my $fh = $self->{fh};
 
@@ -64,7 +63,6 @@ sub getAlert {
     my $position = 0;
 
     while ( my $line = defined($fh) ? <$fh> : <> ) {
-
         chomp($line);
 
         if ($line =~ m/^\*\* Alert (\d+\.\d+):(.*)-(.*)/) {
