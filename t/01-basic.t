@@ -2,7 +2,7 @@ use 5.10.1;
 use strict;
 use warnings;
 
-use Test::More tests=>27;
+use Test::More tests=>20;
 
 BEGIN { use_ok( 'Ossec::Log::Parse' ); }
 

@@ -7,7 +7,7 @@ use autodie;
 use Carp;
 use Scalar::Util qw/openhandle/;
 
-our $VERSION = '0.1.3';
+our $VERSION = '0.1.6';
 
 BEGIN {
     my @accessors = qw/fh file/;
